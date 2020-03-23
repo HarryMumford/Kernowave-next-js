@@ -7,8 +7,8 @@ export default function Index() {
       <Link href="/about">
         <a>About Page</a>
       </Link>
-      <Link href="/">
-        <a>About Page</a>
+      <Link href="/praa-sands">
+        <a>Praa Sands</a>
       </Link>
     </div>
   )
