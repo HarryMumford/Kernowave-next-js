@@ -1,13 +1,11 @@
 import axios from "axios"
 import React from "react"
 
-// ?={timestamp: 1584921600}
-
 export default class PraaSands extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      conditions: [],
+      days: {},
       loaded: false
     }
   }
@@ -15,29 +13,41 @@ export default class PraaSands extends React.Component {
   componentDidMount() {
     axios.get('http://magicseaweed.com/api/e872632fcaa41717190e1812a493dc3b/forecast/?spot_id=8')
     .then(response => {
-      const data = response.data
-      this.setState({ 
-        conditions: data,
-        loaded: true
-      })
+      this.createDailyForecast(response)
     })
   }
 
-  renderConditionsToday() {
-    const swell = this.state.conditions[0].swell
-    const conditions = {
-      day: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][new Date().getDay()-1],
-      swell: `${Math.round((swell.maxBreakingHeight - swell.minBreakingHeight)*3.28084)}ft`,
-      wind: ``
+  createDailyForecast = (response) => {
+    const days = {}
+    const data = response.data
+    for(let d = 4; d < data.length - 4; d += 8) {
+      const day = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][new Date(data[d].timestamp * 1000).getDay()-1]
+      const swell = Math.round((data[d].swell.maxBreakingHeight - data[d].swell.minBreakingHeight)*3.28084)
+      const windSpeed = data[d].wind.speed
+      const compassDirection = data[d].wind.compassDirection
+      days[day] = {swell: swell, wind: {speed: windSpeed, direction: compassDirection}}
     }
-    return <h1>{conditions.day}</h1>
+      this.setState({ 
+        days: days,
+        loaded: true
+      })
   }
 
   render() {
+    const { loaded, days } = this.state
     return (
-      <div>
-          {this.state.loaded && this.renderConditionsToday()}
-      </div>
+      <>
+        <h1>Praa Sands</h1>
+        {loaded && Object.keys(days).map(day => {
+            return (
+              <div>
+                <h2>{day}</h2>
+                <p>{days[day].swell} ft</p>
+                <p>{days[day].wind.speed} km/h | {days[day].wind.direction}</p>
+              </div>
+              )
+          })}
+      </>
     )
   }
 }
