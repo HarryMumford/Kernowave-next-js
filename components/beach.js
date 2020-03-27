@@ -24,11 +24,12 @@ export default class BeachComponent extends React.Component {
     const days = {}
     const data = response.data
     for(let d = 4; d < data.length - 4; d += 8) {
-      const day = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][new Date(data[d].timestamp * 1000).getDay()-1]
+      const day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][new Date(data[d].timestamp * 1000).getDay()]
       const swell = Math.round(((data[d].swell.maxBreakingHeight + data[d].swell.minBreakingHeight)/2)*3.28084)
       const windSpeed = data[d].wind.speed
       const compassDirection = data[d].wind.compassDirection
-      days[day] = {swell: swell, wind: {speed: windSpeed, direction: compassDirection}}
+      const direction = data[d].wind.direction
+      days[day] = {swell: swell, wind: {speed: windSpeed, compassDirection: compassDirection, direction: direction}}
     }
       this.setState({ 
         days: days,
@@ -38,19 +39,21 @@ export default class BeachComponent extends React.Component {
 
   render() {
     const { loaded, days } = this.state
-    const windSpeedIcon = <FontAwesomeIcon icon={faWind} />
-    const windDirectionIcon = <FontAwesomeIcon icon={faLocationArrow} />
     return (
       <div>
+        <FontAwesomeIcon icon={faLocationArrow}/>
         <h1>Praa Sands</h1>
         {loaded && Object.keys(days).map(day => {
-            return (
-              <div>
-                <h2>{day}</h2>
-                <h3>{days[day].swell} ft</h3>
-                <p>{windSpeedIcon} {days[day].wind.speed} km/h {windDirectionIcon} {days[day].wind.direction}</p>
-              </div>
-              )
+          return (
+            <div>
+              <h2>{day}</h2>
+              <h3>{days[day].swell} ft</h3>
+              <p>
+                <FontAwesomeIcon icon={faWind}/> {days[day].wind.speed} km/h <FontAwesomeIcon icon={faLocationArrow} transform={{ rotate: (days[day].wind.direction-45) }}/> 
+                {days[day].wind.compassDirection}
+              </p>
+            </div>
+            )
           })}
       </div>
     )
