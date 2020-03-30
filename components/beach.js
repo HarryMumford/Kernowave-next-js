@@ -3,10 +3,12 @@ import React from "react"
 import Heading from "../style/components/Heading"
 import Header from "../style/components/Header"
 import Wrapper from "../style/components/Wrapper"
+import SwellText from "../style/components/SwellText"
+import GlobalStyle from "../style/components/GlobalStyle"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWind } from '@fortawesome/free-solid-svg-icons'
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons'
-import { createGlobalStyle } from 'styled-components'
+import Subheading from "../style/components/Subheading"
 
 export default class BeachComponent extends React.Component {
   constructor(props) {
@@ -42,25 +44,18 @@ export default class BeachComponent extends React.Component {
   }
 
   render() {
-    const GlobalStyle = createGlobalStyle`
-      body {
-        margin: 0;
-        text-align: center;
-        font-family: 'Open Sans';
-      }
-    `
     const { loaded, days } = this.state
     return (
       <Wrapper>
-      <GlobalStyle />
+      <GlobalStyle/>
         <Header>
           <Heading>Praa Sands</Heading>
         </Header>
         {loaded && Object.keys(days).map(day => {
           return (
             <div>
-              <h2>{day}</h2>
-              <h3>{days[day].swell} ft</h3>
+              <Subheading>{day}</Subheading>
+              <SwellText>{days[day].swell} ft</SwellText>
               <p>
                 <FontAwesomeIcon icon={faWind}/> {days[day].wind.speed} km/h <FontAwesomeIcon icon={faLocationArrow} transform={{ rotate: (days[day].wind.direction-45) }}/> 
                 {days[day].wind.compassDirection}
