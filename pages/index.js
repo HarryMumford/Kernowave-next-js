@@ -1,8 +1,10 @@
 import Link from 'next/link'
+import AddGlobalStyles from '../style/components/AddGlobalStyles'
 
 export default function Index() {
   return (
-    <div>
+    <div className="container">
+      <AddGlobalStyles></AddGlobalStyles>
       <p>Hello Next.js</p>
       <Link href="/about">
         <a>About Page</a>

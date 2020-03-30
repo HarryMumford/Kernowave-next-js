@@ -1,12 +1,16 @@
 import axios from "axios"
 import React from "react"
+import Heading from "../style/components/Heading"
+import Header from "../style/components/Header"
+import Wrapper from "../style/components/Wrapper"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWind } from '@fortawesome/free-solid-svg-icons'
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons'
+import { createGlobalStyle } from 'styled-components'
 
 export default class BeachComponent extends React.Component {
   constructor(props) {
-    super(props)
+    super(props)  
     this.state = {
       days: {},
       loaded: false
@@ -38,11 +42,20 @@ export default class BeachComponent extends React.Component {
   }
 
   render() {
+    const GlobalStyle = createGlobalStyle`
+      body {
+        margin: 0;
+        text-align: center;
+        font-family: 'Open Sans';
+      }
+    `
     const { loaded, days } = this.state
     return (
-      <div>
-        <FontAwesomeIcon icon={faLocationArrow}/>
-        <h1>Praa Sands</h1>
+      <Wrapper>
+      <GlobalStyle />
+        <Header>
+          <Heading>Praa Sands</Heading>
+        </Header>
         {loaded && Object.keys(days).map(day => {
           return (
             <div>
@@ -53,9 +66,9 @@ export default class BeachComponent extends React.Component {
                 {days[day].wind.compassDirection}
               </p>
             </div>
-            )
-          })}
-      </div>
+          )
+        })}
+      </Wrapper>
     )
   }
 }
