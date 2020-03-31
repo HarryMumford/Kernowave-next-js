@@ -1,6 +1,7 @@
 import axios from "axios"
 import React from "react"
 import Heading from "../style/components/Heading"
+import Section from "../style/components/Section"
 import Header from "../style/components/Header"
 import Wrapper from "../style/components/Wrapper"
 import SwellText from "../style/components/SwellText"
@@ -52,35 +53,63 @@ export default class BeachComponent extends React.Component {
       infinite: true,
       speed: 500,
       slidesToShow: 1,
-      slidesToScroll: 1
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            initialSlide: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
     };
     return (
       <Wrapper>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>Praa Sands</title>
-        <link href="https://fonts.googleapis.com/css?family=Norican|Noto+Serif+SC&display=swap" rel="stylesheet"/>
-        <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />  
-      </Helmet>
-      <GlobalStyle/>
-      <Header>
-        <Heading>Praa Sands</Heading>
-      </Header>
-      <Slider {...settings}>
-        {loaded && Object.keys(days).map(day => {
-          return (
-            <div>
-              <Subheading>{day}</Subheading>
-              <SwellText>{days[day].swell} ft</SwellText>
-              <p>
-                <FontAwesomeIcon icon={faWind}/> {days[day].wind.speed} km/h <FontAwesomeIcon icon={faLocationArrow} transform={{ rotate: (days[day].wind.direction-45) }}/> 
-                {days[day].wind.compassDirection}
-              </p>
-            </div>
-          )
-        })}
-      </Slider>
+          <Helmet>
+            <meta charSet="utf-8" />
+            <title>Praa Sands</title>
+            <link href="https://fonts.googleapis.com/css?family=Norican|Noto+Serif+SC&display=swap" rel="stylesheet"/>
+            <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
+            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />  
+          </Helmet>
+          <GlobalStyle/>
+          <Header>
+            <Heading>Praa Sands</Heading>
+          </Header>
+          <Section>
+            <Slider {...settings}>
+              {loaded && Object.keys(days).map(day => {
+                return (
+                  <div>
+                    <Subheading>{day}</Subheading>
+                    <SwellText>{days[day].swell} ft</SwellText>
+                    <p>
+                      <FontAwesomeIcon icon={faWind}/> {days[day].wind.speed} km/h <FontAwesomeIcon icon={faLocationArrow} transform={{ rotate: (days[day].wind.direction-45) }}/> 
+                      {days[day].wind.compassDirection}
+                    </p>
+                  </div>
+                )
+              })}
+            </Slider>
+          </Section>
       </Wrapper>
     )
   }
