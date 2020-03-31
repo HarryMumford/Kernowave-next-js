@@ -1,11 +1,12 @@
 import Link from 'next/link'
-import AddGlobalStyles from '../style/components/AddGlobalStyles'
+import GlobalStyle from "../style/components/GlobalStyle"
+import Title from "../style/components/Title"
 
 export default function Index() {
   return (
-    <div className="container">
-      <AddGlobalStyles></AddGlobalStyles>
-      <p>Hello Next.js</p>
+    <>
+      <GlobalStyle/>
+      <Title>Kernowave</Title>
       <Link href="/about">
         <a>About Page</a>
       </Link>
@@ -15,6 +16,6 @@ export default function Index() {
       <Link href="/beach/3">
         <a>Gwithian</a>
       </Link>
-    </div>
+    </>
   )
 }

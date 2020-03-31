@@ -5,6 +5,7 @@ import Header from "../style/components/Header"
 import Wrapper from "../style/components/Wrapper"
 import SwellText from "../style/components/SwellText"
 import GlobalStyle from "../style/components/GlobalStyle"
+import {Helmet} from "react-helmet";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWind } from '@fortawesome/free-solid-svg-icons'
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons'
@@ -47,6 +48,11 @@ export default class BeachComponent extends React.Component {
     const { loaded, days } = this.state
     return (
       <Wrapper>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Praa Sands</title>
+        <link href="https://fonts.googleapis.com/css?family=Arbutus+Slab|Copse|Norican|Overpass+Mono&display=swap" rel="stylesheet"></link>
+      </Helmet>
       <GlobalStyle/>
         <Header>
           <Heading>Praa Sands</Heading>

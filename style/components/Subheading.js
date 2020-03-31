@@ -1,5 +1,6 @@
 import styled from "styled-components"
 
 export default styled.h2`
-  color: #c7b198;
+  color: #42dee1;
+  text-decoration: underline;
 `
