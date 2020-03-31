@@ -5,9 +5,8 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     text-align: center;
     font-family: 'Noto Serif SC', serif;
-    color: #6decb9;
+    color: #1b262c;
     font-size: 0.8rem;
-    background-color: #eef5b2;
   }
 `
 
