@@ -1,6 +1,5 @@
 import styled from "styled-components"
 
 export default styled.div`
-  background-color: #ffb6b9;
-  margin: 0;
+  background-color: #3fc5f0;
 `

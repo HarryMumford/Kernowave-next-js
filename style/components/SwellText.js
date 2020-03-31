@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
 export default styled.h3`
-  color: #bbded6;
-  font-size: 1.5rem;
+  color: #42dee1;
+  font-size: 2rem;
 `
