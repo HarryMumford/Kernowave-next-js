@@ -1,5 +1,5 @@
 import styled from "styled-components"
 
 export default styled.div`
-  background-color: #090088;
+  background-color: #0f4c81;
 `
