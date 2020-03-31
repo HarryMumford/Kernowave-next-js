@@ -5,6 +5,7 @@ import Header from "../style/components/Header"
 import Wrapper from "../style/components/Wrapper"
 import SwellText from "../style/components/SwellText"
 import GlobalStyle from "../style/components/GlobalStyle"
+import Slider from "react-slick";
 import {Helmet} from "react-helmet";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWind } from '@fortawesome/free-solid-svg-icons'
@@ -46,17 +47,27 @@ export default class BeachComponent extends React.Component {
 
   render() {
     const { loaded, days } = this.state
+    var settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
     return (
       <Wrapper>
       <Helmet>
         <meta charSet="utf-8" />
         <title>Praa Sands</title>
-        <link href="https://fonts.googleapis.com/css?family=Arbutus+Slab|Copse|Norican|Overpass+Mono&display=swap" rel="stylesheet"></link>
+        <link href="https://fonts.googleapis.com/css?family=Norican|Noto+Serif+SC&display=swap" rel="stylesheet"/>
+        <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />  
       </Helmet>
       <GlobalStyle/>
-        <Header>
-          <Heading>Praa Sands</Heading>
-        </Header>
+      <Header>
+        <Heading>Praa Sands</Heading>
+      </Header>
+      <Slider {...settings}>
         {loaded && Object.keys(days).map(day => {
           return (
             <div>
@@ -69,6 +80,7 @@ export default class BeachComponent extends React.Component {
             </div>
           )
         })}
+      </Slider>
       </Wrapper>
     )
   }
