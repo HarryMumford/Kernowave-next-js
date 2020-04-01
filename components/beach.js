@@ -6,19 +6,13 @@ import Header from "../style/components/Header"
 import Wrapper from "../style/components/Wrapper"
 import SwellText from "../style/components/SwellText"
 import GlobalStyle from "../style/components/GlobalStyle"
-import Slider from "react-slick";
+import StyledSlider from "../style/components/StyledSlider"
 import {Helmet} from "react-helmet";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWind } from '@fortawesome/free-solid-svg-icons'
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons'
+import { location } from '../constants'
 import Subheading from "../style/components/Subheading"
-import styled from "styled-components"
-
-const StyledSlider = styled(Slider)`
-  .slick-next:before {
-    color: black;
-  }
-`;
 
 export default class BeachComponent extends React.Component {
   constructor(props) {
@@ -59,24 +53,16 @@ export default class BeachComponent extends React.Component {
       dots: true,
       infinite: true,
       speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
+      slidesToShow: 2,
+      slidesToScroll: 2,
       responsive: [
         {
           breakpoint: 1024,
           settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            infinite: true,
-            dots: true
-          }
-        },
-        {
-          breakpoint: 600,
-          settings: {
             slidesToShow: 2,
             slidesToScroll: 2,
-            initialSlide: 2
+            infinite: true,
+            dots: true
           }
         },
         {
@@ -92,25 +78,25 @@ export default class BeachComponent extends React.Component {
       <Wrapper>
           <Helmet>
             <meta charSet="utf-8" />
-            <title>Praa Sands</title>
+            <title>{location[this.props.id]}</title>
             <link href="https://fonts.googleapis.com/css?family=Norican|Noto+Serif+SC&display=swap" rel="stylesheet"/>
           </Helmet>
           <GlobalStyle/>
           <Header>
-            <Heading>Praa Sands</Heading>
+            <Heading>{location[this.props.id]}</Heading>
           </Header>
           <Section>
             <StyledSlider {...settings}>
               {loaded && Object.keys(days).map(day => {
                 return (
-                  <div>
+                  <>
                     <Subheading>{day}</Subheading>
                     <SwellText>{days[day].swell} ft</SwellText>
                     <p>
                       <FontAwesomeIcon icon={faWind}/> {days[day].wind.speed} km/h <FontAwesomeIcon icon={faLocationArrow} transform={{ rotate: (days[day].wind.direction-45) }}/> 
                       {days[day].wind.compassDirection}
                     </p>
-                  </div>
+                  </>
                 )
               })}
             </StyledSlider>
