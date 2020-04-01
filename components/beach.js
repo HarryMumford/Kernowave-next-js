@@ -76,7 +76,9 @@ export default class BeachComponent extends React.Component {
           }
         }
       ]
-    };
+    }
+    const windSpeed = "bad"
+    const windDirection = "good"
     return (
       <Wrapper>
           <Helmet>
@@ -96,10 +98,10 @@ export default class BeachComponent extends React.Component {
                     <Subheading>{day}</Subheading>
                     <SwellText>{days[day].swell} ft</SwellText>
                     <WindConditionsContainer>
-                      <WindSpeedText>
+                      <WindSpeedText windSpeed={windSpeed}>
                       <StyledFontAwesomeIcon icon={faWind}/>{days[day].wind.speed} km/h
                       </WindSpeedText>
-                      <WindDirectionText>
+                      <WindDirectionText windDirection={windDirection}>
                         <StyledFontAwesomeIcon icon={faLocationArrow} transform={{ rotate: (days[day].wind.direction-45) }}/>
                           {days[day].wind.compassDirection}
                       </WindDirectionText>
