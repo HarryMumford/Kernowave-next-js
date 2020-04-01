@@ -33,6 +33,18 @@ export default class BeachComponent extends React.Component {
     })
   }
 
+  calcShoreDirection (shoreDirection) {
+    if (shoreDirection < 45) {
+      return "Onshore"
+    } else if (shoreDirection < 90) {
+      return "Cross-onshore"
+    } else if (shoreDirection < 135) {
+      return "Cross-offshore"
+    } else {
+      return "Offshore"
+    }
+  }
+
   createDailyForecast = (response) => {
     const days = {}
     const data = response.data
@@ -41,22 +53,51 @@ export default class BeachComponent extends React.Component {
       const swell = Math.round(((data[d].swell.maxBreakingHeight + data[d].swell.minBreakingHeight)/2)*3.28084)
       const windSpeed = data[d].wind.speed
       const compassDirection = data[d].wind.compassDirection
-      const direction = data[d].wind.direction
-      days[day] = {swell: swell, wind: {speed: windSpeed, compassDirection: compassDirection, direction: direction}}
+      const windDirection = data[d].wind.direction
+      const onshoreDirection = location[this.props.id].onshoreDirection
+      const directionDifference = Math.abs(windDirection - onshoreDirection)
+      const angleToOnshore = directionDifference > 180 ? 180 - (directionDifference - 180) : directionDifference
+      const shoreDirection = this.calcShoreDirection(angleToOnshore)
+      days[day] = {
+        swell: swell, 
+        wind: {
+          speed: windSpeed,
+          compassDirection: compassDirection, 
+          direction: windDirection, 
+          shoreDirection: shoreDirection
+        }
+      }
     }
-      this.setState({ 
-        days: days,
-        loaded: true
-      })
+    this.setState({ 
+      days: days,
+      loaded: true
+    })
+  }
+
+  windSpeedQuality (speed) {
+    if (speed > 30) {
+      return "bad"
+    } else if (speed > 15) {
+      return "med"
+    } else {
+      return "good"
+    }
+  }
+
+  windDirectionQuality (shoreDirection) {
+    if (shoreDirection == "Offshore") {
+      return "good"
+    } else if (shoreDirection == "Cross-offshore") {
+      return "med"
+    } else {
+      return "bad"
+    }
   }
 
   render() {
     const { loaded, days } = this.state
-    var settings = {
-      infinite: true,
-      speed: 500,
+    var settings = {  
       slidesToShow: 4,
-      slidesToScroll: 4,
       responsive: [
         {
           breakpoint: 1024,
@@ -77,18 +118,16 @@ export default class BeachComponent extends React.Component {
         }
       ]
     }
-    const windSpeed = "bad"
-    const windDirection = "good"
     return (
       <Wrapper>
           <Helmet>
             <meta charSet="utf-8" />
-            <title>{location[this.props.id]}</title>
+            <title>{location[this.props.id].name}</title>
             <link href="https://fonts.googleapis.com/css?family=Norican|Noto+Serif+SC&display=swap" rel="stylesheet"/>
           </Helmet>
           <GlobalStyle/>
           <Header>
-            <Heading>{location[this.props.id]}</Heading>
+            <Heading>{location[this.props.id].name}</Heading>
           </Header>
           <Section>
             <StyledSlider {...settings}>
@@ -98,15 +137,15 @@ export default class BeachComponent extends React.Component {
                     <Subheading>{day}</Subheading>
                     <SwellText>{days[day].swell} ft</SwellText>
                     <WindConditionsContainer>
-                      <WindSpeedText windSpeed={windSpeed}>
+                      <WindSpeedText windSpeed={this.windSpeedQuality(days[day].wind.speed)}>
                       <StyledFontAwesomeIcon icon={faWind}/>{days[day].wind.speed} km/h
                       </WindSpeedText>
-                      <WindDirectionText windDirection={windDirection}>
+                      <WindDirectionText windDirection={this.windDirectionQuality(days[day].wind.shoreDirection)}>
                         <StyledFontAwesomeIcon icon={faLocationArrow} transform={{ rotate: (days[day].wind.direction-45) }}/>
-                          {days[day].wind.compassDirection}
+                          {days[day].wind.shoreDirection}
                       </WindDirectionText>
                     </WindConditionsContainer>
-                  </>
+                  </> 
                 )
               })}
             </StyledSlider> 
