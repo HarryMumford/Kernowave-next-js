@@ -5,12 +5,15 @@ import Section from "../style/components/Section"
 import Header from "../style/components/Header"
 import Wrapper from "../style/components/Wrapper"
 import SwellText from "../style/components/SwellText"
+import WindSpeedText from "../style/components/WindSpeedText"
+import WindDirectionText from "../style/components/WindDirectionText"
+import WindConditionsContainer from "../style/components/WindConditionsContainer"
 import GlobalStyle from "../style/components/GlobalStyle"
 import StyledSlider from "../style/components/StyledSlider"
+import StyledFontAwesomeIcon from "../style/components/StyledFontAwesomeIcon"
 import {Helmet} from "react-helmet";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faWind } from '@fortawesome/free-solid-svg-icons'
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons'
+import { faWind } from '@fortawesome/free-solid-svg-icons'
 import { location } from '../constants'
 import Subheading from "../style/components/Subheading"
 
@@ -20,7 +23,7 @@ export default class BeachComponent extends React.Component {
     this.state = {
       days: {},
       loaded: false
-    }
+    } 
   }
 
   componentDidMount() {
@@ -50,24 +53,24 @@ export default class BeachComponent extends React.Component {
   render() {
     const { loaded, days } = this.state
     var settings = {
-      dots: true,
       infinite: true,
       speed: 500,
-      slidesToShow: 2,
-      slidesToScroll: 2,
+      slidesToShow: 4,
+      slidesToScroll: 4,
       responsive: [
         {
           breakpoint: 1024,
           settings: {
             slidesToShow: 2,
             slidesToScroll: 2,
-            infinite: true,
             dots: true
           }
         },
         {
           breakpoint: 480,
           settings: {
+            infinite: true,
+            dots: true,
             slidesToShow: 1,
             slidesToScroll: 1
           }
@@ -92,14 +95,19 @@ export default class BeachComponent extends React.Component {
                   <>
                     <Subheading>{day}</Subheading>
                     <SwellText>{days[day].swell} ft</SwellText>
-                    <p>
-                      <FontAwesomeIcon icon={faWind}/> {days[day].wind.speed} km/h <FontAwesomeIcon icon={faLocationArrow} transform={{ rotate: (days[day].wind.direction-45) }}/> 
-                      {days[day].wind.compassDirection}
-                    </p>
+                    <WindConditionsContainer>
+                      <WindSpeedText>
+                      <StyledFontAwesomeIcon icon={faWind}/>{days[day].wind.speed} km/h
+                      </WindSpeedText>
+                      <WindDirectionText>
+                        <StyledFontAwesomeIcon icon={faLocationArrow} transform={{ rotate: (days[day].wind.direction-45) }}/>
+                          {days[day].wind.compassDirection}
+                      </WindDirectionText>
+                    </WindConditionsContainer>
                   </>
                 )
               })}
-            </StyledSlider>
+            </StyledSlider> 
           </Section>
       </Wrapper>
     )
