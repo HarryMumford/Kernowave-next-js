@@ -1,21 +1,21 @@
 import axios from "axios"
 import React from "react"
+import Header from "../style/components/Header"
 import Heading from "../style/components/Heading"
 import Section from "../style/components/Section"
-import Header from "../style/components/Header"
 import Wrapper from "../style/components/Wrapper"
 import SwellText from "../style/components/SwellText"
-import WindSpeedText from "../style/components/WindSpeedText"
-import WindDirectionText from "../style/components/WindDirectionText"
-import WindConditionsContainer from "../style/components/WindConditionsContainer"
+import Subheading from "../style/components/Subheading"
 import GlobalStyle from "../style/components/GlobalStyle"
 import StyledSlider from "../style/components/StyledSlider"
+import WindSpeedText from "../style/components/WindSpeedText"
+import WindDirectionText from "../style/components/WindDirectionText"
 import StyledFontAwesomeIcon from "../style/components/StyledFontAwesomeIcon"
-import {Helmet} from "react-helmet";
+import WindConditionsContainer from "../style/components/WindConditionsContainer"
+import { Helmet } from "react-helmet";
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons'
 import { faWind } from '@fortawesome/free-solid-svg-icons'
 import { location } from '../constants'
-import Subheading from "../style/components/Subheading"
 
 export default class BeachComponent extends React.Component {
   constructor(props) {
@@ -39,7 +39,7 @@ export default class BeachComponent extends React.Component {
     for(let d = 4; d < data.length - 4; d += 8) {
       const day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][new Date(data[d].timestamp * 1000).getDay()]
       const swellSize = Math.round(((data[d].swell.maxBreakingHeight + data[d].swell.minBreakingHeight)/2)*3.28084)
-      const windSpeed = data[d].wind.speed
+      const windSpeed = Math.round(data[d].wind.speed*0.621371)
       const compassDirection = data[d].wind.compassDirection
       const windDirection = data[d].wind.direction
       const onshoreDirection = location[this.props.id].onshoreDirection
@@ -154,7 +154,7 @@ export default class BeachComponent extends React.Component {
                     <SwellText quality={days[day].swell.quality}>{days[day].swell.size} ft</SwellText>
                     <WindConditionsContainer>
                       <WindSpeedText windSpeed={this.windSpeedQuality(days[day].wind.speed)}>
-                      <StyledFontAwesomeIcon icon={faWind}/>{days[day].wind.speed} km/h
+                      <StyledFontAwesomeIcon icon={faWind}/>{days[day].wind.speed} mph
                       </WindSpeedText>
                       <WindDirectionText windDirection={this.windDirectionQuality(days[day].wind.shoreDirection)}>
                         <StyledFontAwesomeIcon icon={faLocationArrow} transform={{ rotate: (days[day].wind.direction-45) }}/>
