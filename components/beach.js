@@ -33,6 +33,40 @@ export default class BeachComponent extends React.Component {
     })
   }
 
+  createDailyForecast = (response) => {
+    const days = {}
+    const data = response.data
+    for(let d = 4; d < data.length - 4; d += 8) {
+      const day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][new Date(data[d].timestamp * 1000).getDay()]
+      const swellSize = Math.round(((data[d].swell.maxBreakingHeight + data[d].swell.minBreakingHeight)/2)*3.28084)
+      const windSpeed = data[d].wind.speed
+      const compassDirection = data[d].wind.compassDirection
+      const windDirection = data[d].wind.direction
+      const onshoreDirection = location[this.props.id].onshoreDirection
+      const directionDifference = Math.abs(windDirection - onshoreDirection)
+      const angleToOnshore = directionDifference > 180 ? 180 - (directionDifference - 180) : directionDifference
+      const shoreDirection = this.calcShoreDirection(angleToOnshore)
+      const swellQuality = this.swellQuality(swellSize, windSpeed, shoreDirection)
+      days[day] = {
+        swell: {
+          size: swellSize,
+          quality: swellQuality
+        },
+        wind: {
+          speed: windSpeed,
+          compassDirection: compassDirection, 
+          direction: windDirection, 
+          shoreDirection: shoreDirection
+        }
+      }
+    }
+
+    this.setState({ 
+      days: days,
+      loaded: true
+    })
+  }
+
   calcShoreDirection (shoreDirection) {
     if (shoreDirection < 45) {
       return "Onshore"
@@ -43,36 +77,7 @@ export default class BeachComponent extends React.Component {
     } else {
       return "Offshore"
     }
-  }
-
-  createDailyForecast = (response) => {
-    const days = {}
-    const data = response.data
-    for(let d = 4; d < data.length - 4; d += 8) {
-      const day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][new Date(data[d].timestamp * 1000).getDay()]
-      const swell = Math.round(((data[d].swell.maxBreakingHeight + data[d].swell.minBreakingHeight)/2)*3.28084)
-      const windSpeed = data[d].wind.speed
-      const compassDirection = data[d].wind.compassDirection
-      const windDirection = data[d].wind.direction
-      const onshoreDirection = location[this.props.id].onshoreDirection
-      const directionDifference = Math.abs(windDirection - onshoreDirection)
-      const angleToOnshore = directionDifference > 180 ? 180 - (directionDifference - 180) : directionDifference
-      const shoreDirection = this.calcShoreDirection(angleToOnshore)
-      days[day] = {
-        swell: swell, 
-        wind: {
-          speed: windSpeed,
-          compassDirection: compassDirection, 
-          direction: windDirection, 
-          shoreDirection: shoreDirection
-        }
-      }
-    }
-    this.setState({ 
-      days: days,
-      loaded: true
-    })
-  }
+  }   
 
   windSpeedQuality (speed) {
     if (speed > 30) {
@@ -91,6 +96,16 @@ export default class BeachComponent extends React.Component {
       return "med"
     } else {
       return "bad"
+    }
+  }
+
+  swellQuality (swellSize, windSpeed, shoreDirection) {
+    if (swellSize < 2 || (this.windDirectionQuality(shoreDirection) == "bad" && this.windSpeedQuality(windSpeed) == "bad")) {
+      return "bad"
+    } else if (this.windSpeedQuality(windSpeed) == "bad") {
+      return "med"
+    } else {
+      return "good"
     }
   }
 
@@ -118,6 +133,7 @@ export default class BeachComponent extends React.Component {
         }
       ]
     }
+
     return (
       <Wrapper>
           <Helmet>
@@ -135,7 +151,7 @@ export default class BeachComponent extends React.Component {
                 return (
                   <>
                     <Subheading>{day}</Subheading>
-                    <SwellText>{days[day].swell} ft</SwellText>
+                    <SwellText quality={days[day].swell.quality}>{days[day].swell.size} ft</SwellText>
                     <WindConditionsContainer>
                       <WindSpeedText windSpeed={this.windSpeedQuality(days[day].wind.speed)}>
                       <StyledFontAwesomeIcon icon={faWind}/>{days[day].wind.speed} km/h

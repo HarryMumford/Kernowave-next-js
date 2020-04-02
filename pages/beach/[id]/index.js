@@ -10,7 +10,6 @@ const Beach = () => {
       {id ? 
         <BeachComponent id={id} /> : <p>loading...</p>
       }
-      
     </>
   )
 }
