@@ -1,5 +1,6 @@
 import axios from "axios"
 import React from "react"
+import Logo from  "../public/logo.jpg"
 import Header from "../style/components/Header"
 import Heading from "../style/components/Heading"
 import Section from "../style/components/Section"
@@ -40,13 +41,14 @@ export default class BeachComponent extends React.Component {
       const day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][new Date(data[d].timestamp * 1000).getDay()]
       const swellSize = Math.round(((data[d].swell.maxBreakingHeight + data[d].swell.minBreakingHeight)/2)*3.28084)
       const windSpeed = Math.round(data[d].wind.speed*0.621371)
-      const compassDirection = data[d].wind.compassDirection
       const windDirection = data[d].wind.direction
       const onshoreDirection = location[this.props.id].onshoreDirection
       const directionDifference = Math.abs(windDirection - onshoreDirection)
       const angleToOnshore = directionDifference > 180 ? 180 - (directionDifference - 180) : directionDifference
       const shoreDirection = this.calcShoreDirection(angleToOnshore)
-      const swellQuality = this.swellQuality(swellSize, windSpeed, shoreDirection)
+      const windDirectionQuality = this.windDirectionQuality(shoreDirection)
+      const windSpeedQuality = this.windSpeedQuality(windSpeed)
+      const swellQuality = this.swellQuality(swellSize, windSpeedQuality, windDirectionQuality)
       days[day] = {
         swell: {
           size: swellSize,
@@ -54,7 +56,6 @@ export default class BeachComponent extends React.Component {
         },
         wind: {
           speed: windSpeed,
-          compassDirection: compassDirection, 
           direction: windDirection, 
           shoreDirection: shoreDirection
         }
@@ -99,10 +100,10 @@ export default class BeachComponent extends React.Component {
     }
   }
 
-  swellQuality (swellSize, windSpeed, shoreDirection) {
-    if (swellSize < 2 || (this.windDirectionQuality(shoreDirection) == "bad" && this.windSpeedQuality(windSpeed) == "bad")) {
+  swellQuality (swellSize, windSpeedQuality, shoreDirectionQuality) {
+    if (swellSize < 2 || ((windSpeedQuality == "bad" || windSpeedQuality == "med") && shoreDirectionQuality == "bad")) {
       return "bad"
-    } else if (this.windSpeedQuality(windSpeed) == "bad") {
+    } else if (windSpeedQuality == "bad") {
       return "med"
     } else {
       return "good"
@@ -165,6 +166,7 @@ export default class BeachComponent extends React.Component {
                 )
               })}
             </StyledSlider> 
+            <img src={Logo}></img>
           </Section>
       </Wrapper>
     )
