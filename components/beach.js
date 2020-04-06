@@ -1,11 +1,13 @@
 import axios from "axios"
 import React from "react"
-import Logo from  "../public/logo.jpg"
+import Logo from "../style/components/Logo"
 import Header from "../style/components/Header"
+import Footer from "../style/components/Footer"
 import Heading from "../style/components/Heading"
 import Section from "../style/components/Section"
 import Wrapper from "../style/components/Wrapper"
 import SwellText from "../style/components/SwellText"
+import FooterText from "../style/components/FooterText"
 import Subheading from "../style/components/Subheading"
 import GlobalStyle from "../style/components/GlobalStyle"
 import StyledSlider from "../style/components/StyledSlider"
@@ -16,7 +18,7 @@ import WindConditionsContainer from "../style/components/WindConditionsContainer
 import { Helmet } from "react-helmet";
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons'
 import { faWind } from '@fortawesome/free-solid-svg-icons'
-import { location } from '../constants'
+import { location, img } from '../constants'
 
 export default class BeachComponent extends React.Component {
   constructor(props) {
@@ -166,9 +168,12 @@ export default class BeachComponent extends React.Component {
                 )
               })}
             </StyledSlider> 
-            <img src={Logo}></img>
           </Section>
+          <Footer>
+            <FooterText>Data provided by</FooterText>
+            <Logo src={img.logo}/>
+          </Footer>
       </Wrapper>
     )
   }
-}
+} 
