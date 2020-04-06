@@ -8,8 +8,6 @@ A responsive frontend app that calculates the quality of surf on beaches in Corn
 
 ![mobile-app](https://drive.google.com/uc?id=1en4_IK0FOzjCFXybY-Y1aa7Rb7mkk4WB)
 
-## Approach
-
 ## Technologies
 
 The app uses next.js, react, styled-components and react-slick. The dynamic and restful next.js routing allows this app to be easily scalable when adding additional beaches from Magic Seaweed's API.
@@ -27,8 +25,6 @@ npm run dev
 ```
 
 I plan to deploy the app in the future.
-
-## Future development
 
 
 
