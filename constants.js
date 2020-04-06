@@ -8,3 +8,7 @@ export const colors = {
   med: "#ffa372",
   good: "#63BE32"
 }
+
+export const img = {
+  logo: "https://drive.google.com/uc?id=1KCNcVIf19AvQoCUqvUwh89_8E6h8gEU8"
+}

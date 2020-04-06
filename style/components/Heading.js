@@ -6,5 +6,5 @@ export default styled.h1`
   letter-spacing: 10px;
   color: white;
   margin: 0;
-  padding: 5% 0 10% 0;
-` 
+  padding: 5% 0 5% 0;
+`   
