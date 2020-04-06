@@ -1,7 +1,6 @@
 # Kernowave
 
-![Webapp screenshot]
-(https://drive.google.com/uc?id=1ZRkQwuUZw_PM9Sagwl6nYQdhE5cdQOuz)
+![Webapp](https://drive.google.com/uc?id=1ZRkQwuUZw_PM9Sagwl6nYQdhE5cdQOuz)
 
 ## Description
 
