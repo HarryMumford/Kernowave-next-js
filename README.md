@@ -6,8 +6,7 @@ A responsive frontend app that calculates the quality of surf on beaches in Corn
 
 ![web-app](https://drive.google.com/uc?id=1ZRkQwuUZw_PM9Sagwl6nYQdhE5cdQOuz)
 
-Mobile view:
-![mobile-app](https://drive.google.com/uc?id=15bK4jmrGpH4xNS3m9K71JxYSNP2TeYeK)
+![mobile-app](https://drive.google.com/uc?id=1k2j86lPIlyMfpDVii7w5PE6ErRpttOLy)
 
 ## Approach
 
