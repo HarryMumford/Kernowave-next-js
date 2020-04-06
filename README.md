@@ -1,12 +1,12 @@
 # Kernowave
 
-![Webapp screenshot](https://drive.google.com/open?id=1ZRkQwuUZw_PM9Sagwl6nYQdhE5cdQOuz)
-
 ## Description
 
-A responsive frontend app that calculates the quality of surf on beaches in Cornwall. A traffic light colour system is indicative of the surf quality and is calculated based on windspeed, coast orientation, swell size and wind direction. 
+A responsive frontend app that calculates the quality of surf on beaches in Cornwall. A traffic light colour system is indicative of the surf quality and is calculated based on windspeed, coast orientation, swell size and wind direction.
 
-## Approach
+![web-app](/public/web.png)
+
+![mobile-app](/public/mobile.png)
 
 ## Technologies
 
@@ -14,19 +14,17 @@ The app uses next.js, react, styled-components and react-slick. The dynamic and 
 
 ## Installation
 
-install Access Control-Allow-Origin - Unblock extension for Chrome 
-clone
-cd to directory
-then:
+install "Access Control-Allow-Origin - Unblock" extension for Chrome, clone, cd to directory, then:
 
 ```
 npm install
 npm run dev
 ```
-
-I plan to deploy the app in the future. It is responsive for all screen sizes.
-
 ## Future development
+
+I am currently working on deploying the app using Electron and Heroku
+
+
 
 
 
