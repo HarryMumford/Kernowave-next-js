@@ -26,9 +26,11 @@ npm install
 npm run dev
 ```
 
-I plan to deploy the app in the future. It is responsive for all screen sizes.
+I plan to deploy the app in the future.
 
 ## Future development
+
+
 
 
 
