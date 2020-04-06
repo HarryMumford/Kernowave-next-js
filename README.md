@@ -14,17 +14,15 @@ The app uses next.js, react, styled-components and react-slick. The dynamic and 
 
 ## Installation
 
-install Access Control-Allow-Origin - Unblock extension for Chrome 
-clone
-cd to directory
-then:
+install "Access Control-Allow-Origin - Unblock" extension for Chrome, clone, cd to directory, then:
 
 ```
 npm install
 npm run dev
 ```
+## Future development
 
-I plan to deploy the app in the future.
+I am currently working on deploying the app using Electron and Heroku
 
 
 
