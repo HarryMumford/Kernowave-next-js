@@ -1,23 +1,25 @@
-import Link from 'next/link'
+import Link from "next/link"
 import GlobalStyle from "../style/components/GlobalStyle"
 import Heading from "../style/components/Heading"
 import BeachesContainer from "../style/components/BeachesContainer"
 import Header from "../style/components/Header"
-import Subheading from "../style/components/Subheading"
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet"
 import BeachContainer from "../style/components/BeachContainer"
 
 export default function Index() {
   return (
     <>
-    <Helmet>
+      <Helmet>
         <meta charSet="utf-8" />
         <title>Kernowave</title>
-        <link href="https://fonts.googleapis.com/css?family=Norican|Noto+Serif+SC&display=swap" rel="stylesheet"/>
+        <link
+          href="https://fonts.googleapis.com/css?family=Norican|Noto+Serif+SC&display=swap"
+          rel="stylesheet"
+        />
       </Helmet>
-      <GlobalStyle/>
+      <GlobalStyle />
       <Header>
-        <Heading>Kernowave</Heading> 
+        <Heading>Kernowave</Heading>
       </Header>
       <BeachesContainer>
         <Link href="/beach/8">
@@ -30,7 +32,3 @@ export default function Index() {
     </>
   )
 }
-
-
-
-
