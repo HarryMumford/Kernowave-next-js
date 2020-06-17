@@ -2,7 +2,7 @@
 
 ## Description
 
-A responsive frontend app that calculates the quality of surf on beaches in Cornwall. A traffic light colour system is indicative of the surf quality and is calculated based on windspeed, coast orientation, swell size and wind direction.
+A responsive frontend app that calculates the quality of surf on beaches in Cornwall. A traffic light colour system is indicative of the surf quality and is calculated based on wind speed, coast orientation, swell size and wind direction.
 
 #### Web view
 

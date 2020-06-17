@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "server": "node express-proxy/proxy.js",
-    "dev": "next dev",
+    "dev": "concurrently -n 'server,client' -c 'green,blue' \"npm run server\" \"next dev\"",
     "build": "next build",
     "start": "next start"
   },
@@ -27,6 +27,7 @@
     "styled-jsx": "^3.2.5"
   },
   "devDependencies": {
+    "concurrently": "^5.2.0",
     "file-loader": "^6.0.0",
     "jest": "^25.1.0",
     "moxios": "^0.4.0",
