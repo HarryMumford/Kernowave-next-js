@@ -6,7 +6,7 @@
     "server": "node express-proxy/proxy.js",
     "dev": "concurrently -n 'server,client' -c 'green,blue' \"npm run server\" \"next dev\"",
     "build": "next build",
-    "start": "concurrently \"npm run server\" \"next start\"",
+    "start": "concurrently \"next start\" \"npm run server\"",
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
