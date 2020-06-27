@@ -6,7 +6,8 @@
     "server": "node express-proxy/proxy.js",
     "dev": "concurrently -n 'server,client' -c 'green,blue' \"npm run server\" \"next dev\"",
     "build": "next build",
-    "start": "concurrently \"npm run server\" \"next start\""
+    "start": "concurrently \"npm run server\" \"next start\"",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
