@@ -33,9 +33,13 @@ export default class BeachComponent extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:5000/spot/${this.props.id}`).then(response => {
-      this.createDailyForecast(response)
-    })
+    axios
+      .get(
+        `http://magicseaweed.com/api/e872632fcaa41717190e1812a493dc3b/forecast/?spot_id=${this.props.id}`
+      )
+      .then(response => {
+        this.createDailyForecast(response)
+      })
   }
 
   createDailyForecast = response => {
