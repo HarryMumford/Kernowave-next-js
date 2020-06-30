@@ -22,11 +22,7 @@ The app uses next.js, react, styled-components and react-slick. The dynamic and 
 npm install
 npm run dev
 ```
+
 ## Future development
 
-I am currently working on deploying the app using Electron and Heroku and using axios to mock api swell and wind conditions.
-
-
-
-
-
+I am currently working on deploying the app using Vercel and Heroku and using axios to mock api swell and wind conditions.
