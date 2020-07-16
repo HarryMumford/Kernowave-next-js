@@ -30,21 +30,23 @@ export default class BeachComponent extends React.Component {
       days: {},
       loaded: false
     }
+    console.log(this.props.data)
   }
 
   componentDidMount() {
-    axios
-      .get(
-        `https://magicseaweed.com/api/e872632fcaa41717190e1812a493dc3b/forecast/?spot_id=${this.props.id}`
-      )
-      .then(response => {
-        this.createDailyForecast(response)
-      })
+    // axios
+    //   .get(
+    //     `https://magicseaweed.com/api/e872632fcaa41717190e1812a493dc3b/forecast/?spot_id=${this.props.id}`
+    //   )
+    //   .then(response => {
+    //     this.createDailyForecast(response)
+    //   })
+    this.createDailyForecast(this.props.data)
   }
 
   createDailyForecast = response => {
     const days = {}
-    const data = response.data
+    const data = response
     for (let d = 4; d < data.length - 4; d += 8) {
       const day = [
         "Sunday",
