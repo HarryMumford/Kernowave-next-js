@@ -8,6 +8,7 @@ import Heading from "../style/components/Heading"
 import Section from "../style/components/Section"
 import Wrapper from "../style/components/Wrapper"
 import HomeIcon from "../style/components/HomeIcon"
+import HomeLink from "../style/components/HomeLink"
 import SwellText from "../style/components/SwellText"
 import FooterText from "../style/components/FooterText"
 import Subheading from "../style/components/Subheading"
@@ -33,14 +34,11 @@ export default class BeachComponent extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:5000/spot/${this.props.id}`).then(response => {
-      this.createDailyForecast(response)
-    })
+    this.createDailyForecast(this.props.data.forecast)
   }
 
-  createDailyForecast = response => {
+  createDailyForecast = data => {
     const days = {}
-    const data = response.data
     for (let d = 4; d < data.length - 4; d += 8) {
       const day = [
         "Sunday",
@@ -58,7 +56,7 @@ export default class BeachComponent extends React.Component {
       )
       const windSpeed = Math.round(data[d].wind.speed * 0.621371)
       const windDirection = data[d].wind.direction
-      const onshoreDirection = location[this.props.id].onshoreDirection
+      const onshoreDirection = this.props.data.onshoreDirection
       const directionDifference = Math.abs(windDirection - onshoreDirection)
       const angleToOnshore =
         directionDifference > 180
@@ -139,6 +137,7 @@ export default class BeachComponent extends React.Component {
 
   render() {
     const { loaded, days } = this.state
+
     var settings = {
       slidesToShow: 4,
       responsive: [
@@ -162,11 +161,19 @@ export default class BeachComponent extends React.Component {
       ]
     }
 
+    const HomeButton = React.forwardRef(({ onClick, href }, ref) => {
+      return (
+        <HomeLink href={href} onClick={onClick} ref={ref}>
+          <HomeIcon icon={faHome} />
+        </HomeLink>
+      )
+    })
+
     return (
       <Wrapper>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>{location[this.props.id].name}</title>
+          <title>{this.props.data.name}</title>
           <link
             href="https://fonts.googleapis.com/css?family=Norican|Noto+Serif+SC&display=swap"
             rel="stylesheet"
@@ -174,17 +181,17 @@ export default class BeachComponent extends React.Component {
         </Helmet>
         <GlobalStyle />
         <Header>
-          <Link href="/">
-            <HomeIcon icon={faHome} />
+          <Link href="/" passHref>
+            <HomeButton />
           </Link>
-          <Heading>{location[this.props.id].name}</Heading>
+          <Heading>{this.props.data.name}</Heading>
         </Header>
         <Section>
           <StyledSlider {...settings}>
             {loaded &&
-              Object.keys(days).map(day => {
+              Object.keys(days).map((day, index) => {
                 return (
-                  <>
+                  <li key={days[day]}>
                     <Subheading>{day}</Subheading>
                     <SwellText quality={days[day].swell.quality}>
                       {days[day].swell.size} ft
@@ -208,7 +215,7 @@ export default class BeachComponent extends React.Component {
                         {days[day].wind.shoreDirection}
                       </WindDirectionText>
                     </WindConditionsContainer>
-                  </>
+                  </li>
                 )
               })}
           </StyledSlider>
