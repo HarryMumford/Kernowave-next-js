@@ -8,6 +8,7 @@ import Heading from "../style/components/Heading"
 import Section from "../style/components/Section"
 import Wrapper from "../style/components/Wrapper"
 import HomeIcon from "../style/components/HomeIcon"
+import HomeLink from "../style/components/HomeLink"
 import SwellText from "../style/components/SwellText"
 import FooterText from "../style/components/FooterText"
 import Subheading from "../style/components/Subheading"
@@ -136,6 +137,7 @@ export default class BeachComponent extends React.Component {
 
   render() {
     const { loaded, days } = this.state
+
     var settings = {
       slidesToShow: 4,
       responsive: [
@@ -159,6 +161,14 @@ export default class BeachComponent extends React.Component {
       ]
     }
 
+    const HomeButton = React.forwardRef(({ onClick, href }, ref) => {
+      return (
+        <HomeLink href={href} onClick={onClick} ref={ref}>
+          <HomeIcon icon={faHome} />
+        </HomeLink>
+      )
+    })
+
     return (
       <Wrapper>
         <Helmet>
@@ -171,17 +181,17 @@ export default class BeachComponent extends React.Component {
         </Helmet>
         <GlobalStyle />
         <Header>
-          <Link href="/">
-            <HomeIcon icon={faHome} />
+          <Link href="/" passHref>
+            <HomeButton />
           </Link>
           <Heading>{this.props.data.name}</Heading>
         </Header>
         <Section>
           <StyledSlider {...settings}>
             {loaded &&
-              Object.keys(days).map(day => {
+              Object.keys(days).map((day, index) => {
                 return (
-                  <>
+                  <li key={days[day]}>
                     <Subheading>{day}</Subheading>
                     <SwellText quality={days[day].swell.quality}>
                       {days[day].swell.size} ft
@@ -205,7 +215,7 @@ export default class BeachComponent extends React.Component {
                         {days[day].wind.shoreDirection}
                       </WindDirectionText>
                     </WindConditionsContainer>
-                  </>
+                  </li>
                 )
               })}
           </StyledSlider>
