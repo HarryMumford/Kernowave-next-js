@@ -30,23 +30,14 @@ export default class BeachComponent extends React.Component {
       days: {},
       loaded: false
     }
-    console.log(this.props.data)
   }
 
   componentDidMount() {
-    // axios
-    //   .get(
-    //     `https://magicseaweed.com/api/e872632fcaa41717190e1812a493dc3b/forecast/?spot_id=${this.props.id}`
-    //   )
-    //   .then(response => {
-    //     this.createDailyForecast(response)
-    //   })
-    this.createDailyForecast(this.props.data)
+    this.createDailyForecast(this.props.data.forecast)
   }
 
-  createDailyForecast = response => {
+  createDailyForecast = data => {
     const days = {}
-    const data = response
     for (let d = 4; d < data.length - 4; d += 8) {
       const day = [
         "Sunday",
@@ -64,7 +55,7 @@ export default class BeachComponent extends React.Component {
       )
       const windSpeed = Math.round(data[d].wind.speed * 0.621371)
       const windDirection = data[d].wind.direction
-      const onshoreDirection = location[this.props.id].onshoreDirection
+      const onshoreDirection = this.props.data.onshoreDirection
       const directionDifference = Math.abs(windDirection - onshoreDirection)
       const angleToOnshore =
         directionDifference > 180
@@ -172,7 +163,7 @@ export default class BeachComponent extends React.Component {
       <Wrapper>
         <Helmet>
           <meta charSet="utf-8" />
-          <title>{location[this.props.id].name}</title>
+          <title>{this.props.data.name}</title>
           <link
             href="https://fonts.googleapis.com/css?family=Norican|Noto+Serif+SC&display=swap"
             rel="stylesheet"
@@ -183,7 +174,7 @@ export default class BeachComponent extends React.Component {
           <Link href="/">
             <HomeIcon icon={faHome} />
           </Link>
-          <Heading>{location[this.props.id].name}</Heading>
+          <Heading>{this.props.data.name}</Heading>
         </Header>
         <Section>
           <StyledSlider {...settings}>
