@@ -58,11 +58,9 @@ export default class BeachComponent extends React.Component {
         "Saturday"
       ][new Date(data[d].timestamp * 1000).getDay()]
       const swellSize = Math.round(
-        ((data[d].swell.maxBreakingHeight + data[d].swell.minBreakingHeight) /
-          2) *
-          3.28084
+        (data[d].swell.maxBreakingHeight + data[d].swell.minBreakingHeight) / 2
       )
-      const windSpeed = Math.round(data[d].wind.speed * 0.621371)
+      const windSpeed = Math.round(data[d].wind.speed)
       const windDirection = data[d].wind.direction
       const onshoreDirection = this.props.data.onshoreDirection
       const directionDifference = Math.abs(windDirection - onshoreDirection)

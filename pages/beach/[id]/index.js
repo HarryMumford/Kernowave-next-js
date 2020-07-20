@@ -20,7 +20,7 @@ Beach.getInitialProps = async function() {
   for (let i = 0; i < locations.length; i++) {
     const spotId = locations[i]
     const res = await fetch(
-      `https://magicseaweed.com/api/e872632fcaa41717190e1812a493dc3b/forecast/?spot_id=${spotId}`
+      `https://magicseaweed.com/api/e872632fcaa41717190e1812a493dc3b/forecast/?spot_id=${spotId}&units=uk`
     )
     const forecast = await res.json()
     const onshoreDirection = location[spotId].onshoreDirection
