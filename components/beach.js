@@ -24,6 +24,14 @@ import { faWind } from "@fortawesome/free-solid-svg-icons"
 import { faHome } from "@fortawesome/free-solid-svg-icons"
 import { location, img } from "../constants"
 
+const HomeButton = React.forwardRef(({ onClick, href }, ref) => {
+  return (
+    <HomeLink href={href} onClick={onClick} ref={ref}>
+      <HomeIcon icon={faHome} />
+    </HomeLink>
+  )
+})
+
 export default class BeachComponent extends React.Component {
   constructor(props) {
     super(props)
@@ -161,69 +169,68 @@ export default class BeachComponent extends React.Component {
       ]
     }
 
-    const HomeButton = React.forwardRef(({ onClick, href }, ref) => {
-      return (
-        <HomeLink href={href} onClick={onClick} ref={ref}>
-          <HomeIcon icon={faHome} />
-        </HomeLink>
-      )
-    })
-
     return (
       <Wrapper>
-        <Helmet>
-          <meta charSet="utf-8" />
-          <title>{this.props.data.name}</title>
-          <link
-            href="https://fonts.googleapis.com/css?family=Norican|Noto+Serif+SC&display=swap"
-            rel="stylesheet"
-          />
-        </Helmet>
-        <GlobalStyle />
-        <Header>
-          <Link href="/" passHref>
-            <HomeButton />
-          </Link>
-          <Heading>{this.props.data.name}</Heading>
-        </Header>
-        <Section>
-          <StyledSlider {...settings}>
-            {loaded &&
-              Object.keys(days).map((day, index) => {
-                return (
-                  <li key={days[day]}>
-                    <Subheading>{day}</Subheading>
-                    <SwellText quality={days[day].swell.quality}>
-                      {days[day].swell.size} ft
-                    </SwellText>
-                    <WindConditionsContainer>
-                      <WindSpeedText
-                        windSpeed={this.windSpeedQuality(days[day].wind.speed)}
-                      >
-                        <StyledFontAwesomeIcon icon={faWind} />
-                        {days[day].wind.speed} mph
-                      </WindSpeedText>
-                      <WindDirectionText
-                        windDirection={this.windDirectionQuality(
-                          days[day].wind.shoreDirection
-                        )}
-                      >
-                        <StyledFontAwesomeIcon
-                          icon={faLocationArrow}
-                          transform={{ rotate: days[day].wind.direction - 45 }}
-                        />
-                        {days[day].wind.shoreDirection}
-                      </WindDirectionText>
-                    </WindConditionsContainer>
-                  </li>
-                )
-              })}
-          </StyledSlider>
-        </Section>
-        <Footer>
-          <FooterText>Data provided by</FooterText>
-          <Logo src={img.logo} />
-        </Footer>
+        {loaded && (
+          <>
+            <Helmet>
+              <meta charSet="utf-8" />
+              <title>{this.props.data.name}</title>
+              <link
+                href="https://fonts.googleapis.com/css?family=Norican|Noto+Serif+SC&display=swap"
+                rel="stylesheet"
+              />
+            </Helmet>
+            <GlobalStyle />
+            <Header>
+              <Link href="/" passHref>
+                <HomeButton />
+              </Link>
+              <Heading>{this.props.data.name}</Heading>
+            </Header>
+            <Section>
+              <StyledSlider {...settings}>
+                {Object.keys(days).map((day, index) => {
+                  return (
+                    <li key={days[day]}>
+                      <Subheading>{day}</Subheading>
+                      <SwellText quality={days[day].swell.quality}>
+                        {days[day].swell.size} ft
+                      </SwellText>
+                      <WindConditionsContainer>
+                        <WindSpeedText
+                          windSpeed={this.windSpeedQuality(
+                            days[day].wind.speed
+                          )}
+                        >
+                          <StyledFontAwesomeIcon icon={faWind} />
+                          {days[day].wind.speed} mph
+                        </WindSpeedText>
+                        <WindDirectionText
+                          windDirection={this.windDirectionQuality(
+                            days[day].wind.shoreDirection
+                          )}
+                        >
+                          <StyledFontAwesomeIcon
+                            icon={faLocationArrow}
+                            transform={{
+                              rotate: days[day].wind.direction - 45
+                            }}
+                          />
+                          {days[day].wind.shoreDirection}
+                        </WindDirectionText>
+                      </WindConditionsContainer>
+                    </li>
+                  )
+                })}
+              </StyledSlider>
+            </Section>
+            <Footer>
+              <FooterText>Data provided by</FooterText>
+              <Logo src={img.logo} />
+            </Footer>
+          </>
+        )}
       </Wrapper>
     )
   }
