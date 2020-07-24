@@ -8,7 +8,7 @@ A minimalist, sleek and responsive interface for displaying the surf conditions 
 
 ## Live Website
 
-The application is deployed [Here](https://kernowave-next-js.vercel.app/) using Vercel.
+The application is deployed [here](https://kernowave-next-js.vercel.app/) using Vercel.
 
 |               Phone view               |               Web view               |
 | :------------------------------------: | :----------------------------------: |
