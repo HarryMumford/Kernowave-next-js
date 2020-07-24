@@ -49,5 +49,5 @@ Pushing to master will automatically trigger a build and deploy to Vercel
 
 ## Next Tasks
 
-- Add more detail on each day of forecast i.e. tide and specific times
-- Add an about page explaining how the surf quality is calculated
+- [x] Add more detail on each day of forecast i.e. tide and specific times
+- [x] Add an about page explaining how the surf quality is calculated
