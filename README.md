@@ -1,5 +1,3 @@
-[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://kernowave-next-js.vercel.app/)
-
 # Kernowave
 
 [Description](#description) | [Live Website](#live-website) | [Technologies Used](#technologies-used) | [Challenges and Goals](#challenges-and-goals) | [Getting Started](#getting-started) | [How to Run the App](#how-to-run-the-app) | [Continuous Integration and Delivery](#continuous-integration-and-delivery) | [Next Tasks](#next-tasks)
