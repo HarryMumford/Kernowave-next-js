@@ -1,3 +1,5 @@
+~![]([![CircleCI](https://badgen.net/badge/icon/zeit?icon=zeit&label)
+
 # Kernowave
 
 [Description](#description) | [Live Website](#live-website) | [Technologies Used](#technologies-used) | [Challenges and Goals](#challenges-and-goals) | [Getting Started](#getting-started) | [How to Run the App](#how-to-run-the-app) | [Continuous Integration and Delivery](#continuous-integration-and-delivery) | [Next Tasks](#next-tasks)
