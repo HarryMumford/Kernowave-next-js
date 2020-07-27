@@ -1,4 +1,3 @@
-import axios from "axios"
 import Link from "next/link"
 import React from "react"
 import Logo from "../style/components/Logo"
@@ -7,10 +6,9 @@ import Footer from "../style/components/Footer"
 import Heading from "../style/components/Heading"
 import Section from "../style/components/Section"
 import Wrapper from "../style/components/Wrapper"
-import HomeIcon from "../style/components/HomeIcon"
-import HomeLink from "../style/components/HomeLink"
 import SwellText from "../style/components/SwellText"
 import FooterText from "../style/components/FooterText"
+import { HomeButton } from "./home-button"
 import Subheading from "../style/components/Subheading"
 import GlobalStyle from "../style/components/GlobalStyle"
 import StyledSlider from "../style/components/StyledSlider"
@@ -21,16 +19,7 @@ import WindConditionsContainer from "../style/components/WindConditionsContainer
 import { Helmet } from "react-helmet"
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons"
 import { faWind } from "@fortawesome/free-solid-svg-icons"
-import { faHome } from "@fortawesome/free-solid-svg-icons"
-import { location, img } from "../constants"
-
-const HomeButton = React.forwardRef(({ onClick, href }, ref) => {
-  return (
-    <HomeLink href={href} onClick={onClick} ref={ref}>
-      <HomeIcon icon={faHome} />
-    </HomeLink>
-  )
-})
+import { img } from "../constants"
 
 export default class BeachComponent extends React.Component {
   constructor(props) {

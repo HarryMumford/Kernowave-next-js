@@ -27,6 +27,7 @@ Beach.getInitialProps = async function() {
     const name = location[spotId].name
 
     data[spotId] = {
+      spotId: Number(spotId),
       name,
       onshoreDirection,
       forecast: forecast
