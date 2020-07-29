@@ -1,6 +1,11 @@
 export default class SurfQuality {
   constructor(data) {
     this.data = data
+    this.data.forecast.windRelativeDirection = this.windRelativeDirection()
+    this.data.forecast.quality = {
+      windSpeed: this.windSpeedQuality(),
+      windDirection: this.windDirectionQuality()
+    }
   }
 
   windSpeedQuality() {
@@ -15,7 +20,7 @@ export default class SurfQuality {
     }
   }
 
-  windRelativeOrientation() {
+  windRelativeDirection() {
     const { onshoreDirection } = this.data
     const { windDirection } = this.data.forecast
 
@@ -33,6 +38,19 @@ export default class SurfQuality {
       return "Cross-offshore"
     } else {
       return "Offshore"
+    }
+  }
+
+  windDirectionQuality() {
+    const { windRelativeDirection } = this.data.forecast
+
+    if (
+      windRelativeDirection == "OnShore" ||
+      windRelativeDirection == "Cross-onshore"
+    ) {
+      return -1
+    } else {
+      return 1
     }
   }
 }

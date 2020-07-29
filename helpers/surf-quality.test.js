@@ -78,4 +78,12 @@ describe("SurfQuality", () => {
       expect(surf.windRelativeOrientation()).toBe("Offshore")
     })
   })
+
+  describe("windDirectionQuality", () => {
+    test.only("returns -1 when onshore", () => {
+      const surf = new SurfQuality(data)
+
+      expect(surf.windDirectionQuality()).toBe(-1)
+    })
+  })
 })
