@@ -45,11 +45,12 @@ export default class SurfQuality {
     const { windRelativeDirection } = this.data.forecast
 
     if (
-      windRelativeDirection == "OnShore" ||
+      windRelativeDirection == "Onshore" ||
       windRelativeDirection == "Cross-onshore"
     ) {
       return -1
     } else {
+      1
       return 1
     }
   }
