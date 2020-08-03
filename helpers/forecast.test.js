@@ -1,15 +1,9 @@
 import Forecast from "./forecast"
 import { mockedResponse } from "../mocks/mocked-api-response"
-// import SurfQuality from "./surf-quality"
-// jest.mock("./surf-quality")
 
 const onshoreDirection = 0
 
 const forecast = new Forecast(mockedResponse, onshoreDirection)
-
-// beforeEach(() => {
-//   SurfQuality.mockClear()
-// })
 
 describe("Forecast", () => {
   describe("windRelativeDirection", () => {
@@ -47,8 +41,7 @@ describe("Forecast", () => {
         "windSpeed",
         "windDirection",
         "windRelativeDirection",
-        "waveHeight",
-        "quality"
+        "waveHeight"
       ])
     })
     test("returns the correct day", () => {

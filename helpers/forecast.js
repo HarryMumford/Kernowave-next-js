@@ -44,15 +44,13 @@ export default class Forecast {
       const windSpeed = Math.round(data[d].wind.speed)
       const windDirection = data[d].wind.direction
       const windRelativeDirection = this.windRelativeDirection(windDirection)
-      const quality = {}
 
       forecast.push({
         day,
         windSpeed,
         windDirection,
         windRelativeDirection,
-        waveHeight,
-        quality
+        waveHeight
       })
     }
 

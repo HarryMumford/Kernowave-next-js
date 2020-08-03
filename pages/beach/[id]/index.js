@@ -4,7 +4,8 @@ import BeachComponent from "../../../components/beach"
 import { location } from "../../../constants"
 
 import "isomorphic-unfetch"
-import { createForecast } from "../../../helpers/forecast"
+import SurfQuality from "../../../helpers/surf-quality"
+import Forecast from "../../../helpers/forecast"
 
 const Beach = props => {
   const router = useRouter()
@@ -26,7 +27,7 @@ Beach.getInitialProps = async function() {
     )
     const data = await res.json()
 
-    const forecast = createForecast(data)
+    const forecast = new Forecast(data)
 
     const onshoreDirection = location[spotId].onshoreDirection
     const name = location[spotId].name
@@ -34,8 +35,10 @@ Beach.getInitialProps = async function() {
     payload[spotId] = {
       name,
       onshoreDirection,
-      forecast
+      forecast: forecast.create()
     }
+
+    console.log(payload[3].forecast)
   }
 
   return {

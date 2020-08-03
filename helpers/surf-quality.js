@@ -2,9 +2,9 @@ export default class SurfQuality {
   constructor(data, onshoreDirection = 0) {
     this.onshoreDirection = onshoreDirection
     this.data = data
-    this.data.forecast.quality.windSpeed = this.windSpeedQuality()
-    this.data.forecast.quality.windDirection = this.windDirectionQuality()
-    this.data.forecast.quality.overall = this.overallQuality()
+    this.windSpeed = this.windSpeedQuality()
+    this.windDirection = this.windDirectionQuality()
+    this.overall = this.overallQuality()
   }
 
   windSpeedQuality() {
@@ -35,7 +35,7 @@ export default class SurfQuality {
 
   overallQuality() {
     const { waveHeight } = this.data.forecast
-    const { windSpeed, windDirection } = this.data.forecast.quality
+    const { windSpeed, windDirection } = this
 
     if (waveHeight < 2 || (windSpeed <= 0 && windDirection < 0)) {
       return -1
