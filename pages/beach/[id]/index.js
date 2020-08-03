@@ -27,7 +27,7 @@ Beach.getInitialProps = async function() {
     )
     const data = await res.json()
 
-    const forecast = new Forecast(data)
+    let forecast = new Forecast(data).create()
 
     const onshoreDirection = location[spotId].onshoreDirection
     const name = location[spotId].name
@@ -35,10 +35,8 @@ Beach.getInitialProps = async function() {
     payload[spotId] = {
       name,
       onshoreDirection,
-      forecast: forecast.create()
+      forecast: forecast
     }
-
-    console.log(payload[3].forecast)
   }
 
   return {

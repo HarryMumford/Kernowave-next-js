@@ -41,7 +41,8 @@ describe("Forecast", () => {
         "windSpeed",
         "windDirection",
         "windRelativeDirection",
-        "waveHeight"
+        "waveHeight",
+        "quality"
       ])
     })
     test("returns the correct day", () => {

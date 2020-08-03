@@ -25,7 +25,6 @@ export default class BeachComponent extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: {},
       loaded: false
     }
   }
@@ -38,6 +37,7 @@ export default class BeachComponent extends React.Component {
 
   render() {
     const { data } = this.props
+    const { forecast } = this.props.data
     const { loaded } = this.state
 
     var settings = {
@@ -84,34 +84,28 @@ export default class BeachComponent extends React.Component {
             </Header>
             <Section>
               <StyledSlider {...settings}>
-                {Object.keys(data).map((day, index) => {
+                {forecast.map(dailyForecast => {
                   return (
-                    <li key={data[day]}>
-                      <Subheading>{day}</Subheading>
-                      <SwellText quality={data[day].swell.quality}>
-                        {data[day].swell.size} ft
+                    <li key={dailyForecast.day}>
+                      <Subheading>{dailyForecast.day}</Subheading>
+                      <SwellText quality={dailyForecast.quality.overall}>
+                        {dailyForecast.waveHeight} ft
                       </SwellText>
                       <WindConditionsContainer>
                         <WindSpeedText
-                          windSpeed={this.windSpeedQuality(
-                            data[day].wind.speed
-                          )}
+                          windSpeed={dailyForecast.quality.windSpeed}
                         >
                           <StyledFontAwesomeIcon icon={faWind} />
-                          {data[day].wind.speed} mph
+                          {dailyForecast.windSpeed} mph
                         </WindSpeedText>
-                        <WindDirectionText
-                          windDirection={this.windDirectionQuality(
-                            data[day].wind.shoreDirection
-                          )}
-                        >
+                        <WindDirectionText>
                           <StyledFontAwesomeIcon
                             icon={faLocationArrow}
                             transform={{
-                              rotate: data[day].wind.direction - 45
+                              rotate: dailyForecast.windDirection - 45
                             }}
                           />
-                          {data[day].wind.shoreDirection}
+                          {dailyForecast.windDirection}
                         </WindDirectionText>
                       </WindConditionsContainer>
                     </li>

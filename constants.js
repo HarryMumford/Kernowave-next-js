@@ -4,9 +4,9 @@ export const location = {
 }
 
 export const colors = {
-  bad: "#ed6663",
-  med: "#ffa372",
-  good: "#63BE32"
+  0: "#ed6663",
+  1: "#ffa372",
+  2: "#63BE32"
 }
 
 export const img = {
