@@ -1,8 +1,9 @@
 
+![](https://badgen.net/badge/icon/zeit?icon=zeit&label)
 
 # Kernowave
 
-[Description](#description) | [Live Website](#live-website) | [Technologies Used](#technologies-used) | [Challenges and Goals](#challenges-and-goals) | [Getting Started](#getting-started) | [How to Run the App](#how-to-run-the-app) | [Continuous Integration and Delivery](#continuous-integration-and-delivery) | [Design Approach](#design-approach) | [Database Schema](#database-schema) | [Next Tasks](#next-tasks)
+[Description](#description) | [Live Website](#live-website) | [Technologies Used](#technologies-used) | [Challenges and Goals](#challenges-and-goals) | [Getting Started](#getting-started) | [How to Run the App](#how-to-run-the-app) | [Continuous Integration and Delivery](#continuous-integration-and-delivery) | [Next Tasks](#next-tasks)
 
 ## Description
 
@@ -10,7 +11,7 @@ A minimalist, sleek and responsive interface for displaying the surf conditions 
 
 ## Live Website
 
-The application is deployed [Here](https://kernowave-next-js.vercel.app/) using Vercel.
+The application is deployed [here](https://kernowave-next-js.vercel.app/) using Vercel.
 
 |               Phone view               |               Web view               |
 | :------------------------------------: | :----------------------------------: |
@@ -51,5 +52,5 @@ Pushing to master will automatically trigger a build and deploy to Vercel
 
 ## Next Tasks
 
-- Add more detail on each day of forecast i.e. tide and specific times
-- Add an about page explaining how the surf quality is calculated
+- [ ] Add more detail on each day of forecast i.e. tide and specific times
+- [ ] Add an about page explaining how the surf quality is calculated
