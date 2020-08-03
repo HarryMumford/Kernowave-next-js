@@ -69,7 +69,7 @@ export default class BeachComponent extends React.Component {
           <>
             <Helmet>
               <meta charSet="utf-8" />
-              <title>{this.props.data.name}</title>
+              <title>{data.name}</title>
               <link
                 href="https://fonts.googleapis.com/css?family=Norican|Noto+Serif+SC&display=swap"
                 rel="stylesheet"
@@ -80,7 +80,7 @@ export default class BeachComponent extends React.Component {
               <Link href="/" passHref>
                 <HomeButton />
               </Link>
-              <Heading>{this.props.data.name}</Heading>
+              <Heading>{data.name}</Heading>
             </Header>
             <Section>
               <StyledSlider {...settings}>
@@ -98,14 +98,16 @@ export default class BeachComponent extends React.Component {
                           <StyledFontAwesomeIcon icon={faWind} />
                           {dailyForecast.windSpeed} mph
                         </WindSpeedText>
-                        <WindDirectionText>
+                        <WindDirectionText
+                          windDirection={dailyForecast.quality.windDirection}
+                        >
                           <StyledFontAwesomeIcon
                             icon={faLocationArrow}
                             transform={{
                               rotate: dailyForecast.windDirection - 45
                             }}
                           />
-                          {dailyForecast.windDirection}
+                          {dailyForecast.windRelativeDirection}
                         </WindDirectionText>
                       </WindConditionsContainer>
                     </li>

@@ -10,11 +10,11 @@ export default class SurfQuality {
     const { windSpeed } = this.inputData
 
     if (windSpeed < 15) {
-      return 1
+      return 2
     } else if (windSpeed < 30) {
-      return 0
+      return 1
     } else {
-      return -1
+      return 0
     }
   }
 
@@ -25,10 +25,9 @@ export default class SurfQuality {
       windRelativeDirection == "Onshore" ||
       windRelativeDirection == "Cross-onshore"
     ) {
-      return -1
+      return 0
     } else {
-      1
-      return 1
+      return 2
     }
   }
 
@@ -36,12 +35,12 @@ export default class SurfQuality {
     const { waveHeight } = this.inputData
     const { windSpeed, windDirection } = this
 
-    if (waveHeight < 2 || (windSpeed <= 0 && windDirection < 0)) {
-      return -1
-    } else if (windSpeed < 0 && waveHeight >= 3) {
+    if (waveHeight < 3 || (windSpeed <= 1 && windDirection < 1)) {
       return 0
-    } else {
+    } else if (windSpeed < 1 && waveHeight >= 3) {
       return 1
+    } else {
+      return 2
     }
   }
 
