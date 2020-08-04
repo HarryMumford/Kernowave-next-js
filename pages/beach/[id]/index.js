@@ -4,29 +4,35 @@ import BeachComponent from "../../../components/beach"
 import { location } from "../../../constants"
 
 import "isomorphic-unfetch"
+import SurfQuality from "../../../helpers/surf-quality"
+import Forecast from "../../../helpers/forecast"
 
 const Beach = props => {
   const router = useRouter()
   const { id } = router.query
   return (
-    <>{id ? <BeachComponent data={props.data[id]} /> : <p>loading...</p>}</>
+    <>{id ? <BeachComponent data={props.payload[id]} /> : <p>loading...</p>}</>
   )
 }
 
 Beach.getInitialProps = async function() {
   const locations = Object.keys(location)
-  const data = {}
+  let payload = {}
 
   for (let i = 0; i < locations.length; i++) {
     const spotId = locations[i]
+
     const res = await fetch(
       `https://magicseaweed.com/api/e872632fcaa41717190e1812a493dc3b/forecast/?spot_id=${spotId}&units=uk`
     )
-    const forecast = await res.json()
+    const data = await res.json()
+
+    let forecast = new Forecast(data).create()
+
     const onshoreDirection = location[spotId].onshoreDirection
     const name = location[spotId].name
 
-    data[spotId] = {
+    payload[spotId] = {
       name,
       onshoreDirection,
       forecast: forecast
@@ -34,7 +40,7 @@ Beach.getInitialProps = async function() {
   }
 
   return {
-    data
+    payload
   }
 }
 
