@@ -4,7 +4,6 @@ import BeachComponent from "../../../components/beach"
 import { location } from "../../../constants"
 
 import "isomorphic-unfetch"
-import SurfQuality from "../../../helpers/surf-quality"
 import Forecast from "../../../helpers/forecast"
 
 const Beach = props => {

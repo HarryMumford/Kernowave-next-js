@@ -6,6 +6,7 @@ import Footer from "../style/components/Footer"
 import Heading from "../style/components/Heading"
 import Section from "../style/components/Section"
 import Wrapper from "../style/components/Wrapper"
+import Slider from "./slider"
 import SwellText from "../style/components/SwellText"
 import FooterText from "../style/components/FooterText"
 import { HomeButton } from "./home-button"
@@ -83,37 +84,7 @@ export default class BeachComponent extends React.Component {
               <Heading>{data.name}</Heading>
             </Header>
             <Section>
-              <StyledSlider {...settings}>
-                {forecast.map(dailyForecast => {
-                  return (
-                    <li key={dailyForecast.day}>
-                      <Subheading>{dailyForecast.day}</Subheading>
-                      <SwellText quality={dailyForecast.quality.overall}>
-                        {dailyForecast.waveHeight} ft
-                      </SwellText>
-                      <WindConditionsContainer>
-                        <WindSpeedText
-                          windSpeed={dailyForecast.quality.windSpeed}
-                        >
-                          <StyledFontAwesomeIcon icon={faWind} />
-                          {dailyForecast.windSpeed} mph
-                        </WindSpeedText>
-                        <WindDirectionText
-                          windDirection={dailyForecast.quality.windDirection}
-                        >
-                          <StyledFontAwesomeIcon
-                            icon={faLocationArrow}
-                            transform={{
-                              rotate: dailyForecast.windDirection - 45
-                            }}
-                          />
-                          {dailyForecast.windRelativeDirection}
-                        </WindDirectionText>
-                      </WindConditionsContainer>
-                    </li>
-                  )
-                })}
-              </StyledSlider>
+              <Slider forecast={forecast} />
             </Section>
             <Footer>
               <FooterText>Data provided by</FooterText>
