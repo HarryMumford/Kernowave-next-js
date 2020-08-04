@@ -5,6 +5,7 @@ import BeachesContainer from "../style/components/BeachesContainer"
 import Header from "../style/components/Header"
 import { Helmet } from "react-helmet"
 import BeachContainer from "../style/components/BeachContainer"
+import { location } from "../constants"
 
 export default function Index() {
   return (
@@ -22,12 +23,15 @@ export default function Index() {
         <Heading>Kernowave</Heading>
       </Header>
       <BeachesContainer>
-        <Link href="/beach/8">
-          <BeachContainer>Praa Sands</BeachContainer>
-        </Link>
-        <Link href="/beach/3">
-          <BeachContainer>Gwithian</BeachContainer>
-        </Link>
+        {Object.keys(location).map(spotId => {
+          const name = location[spotId].name
+
+          return (
+            <Link href="/beach/[spot]" as={`/beach/${spotId}`}>
+              <BeachContainer>{name}</BeachContainer>
+            </Link>
+          )
+        })}
       </BeachesContainer>
     </>
   )

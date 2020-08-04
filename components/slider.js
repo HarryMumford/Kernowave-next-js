@@ -1,4 +1,6 @@
+import Link from "next/link"
 import React from "react"
+import DailyForecast from "../style/components/DailyForecast"
 import SwellText from "../style/components/SwellText"
 import Subheading from "../style/components/Subheading"
 import StyledSlider from "../style/components/StyledSlider"
@@ -37,8 +39,13 @@ export default function Slider(props) {
     <StyledSlider {...settings}>
       {props.forecast.map(dailyForecast => {
         return (
-          <li key={dailyForecast.day}>
-            <Subheading>{dailyForecast.day}</Subheading>
+          <DailyForecast
+            style={{ backgroundColor: "red" }}
+            key={dailyForecast.day}
+          >
+            <Link href="/beach/[id]/[day]">
+              <Subheading>{dailyForecast.day}</Subheading>
+            </Link>
             <SwellText quality={dailyForecast.quality.overall}>
               {dailyForecast.waveHeight} ft
             </SwellText>
@@ -59,7 +66,7 @@ export default function Slider(props) {
                 {dailyForecast.windRelativeDirection}
               </WindDirectionText>
             </WindConditionsContainer>
-          </li>
+          </DailyForecast>
         )
       })}
     </StyledSlider>
