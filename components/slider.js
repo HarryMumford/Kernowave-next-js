@@ -1,7 +1,9 @@
-import Link from "next/link"
 import React from "react"
 import StyledSlider from "../style/components/StyledSlider"
 import DailyForecast from "./DailyForecast"
+import { useState, useEffect } from "react"
+import DailyForecastContainer from "../style/components/DailyForecastContainer"
+import MoreDetails from "./MoreDetails"
 
 var settings = {
   slidesToShow: 4,
@@ -27,13 +29,22 @@ var settings = {
 }
 
 export default function Slider(props) {
+  const [moreDetails, setMoreDetails] = useState(false)
+
   return (
     <StyledSlider {...settings}>
       {props.forecast.map(dailyForecast => {
         return (
-          <Link href="/beach/[id]/[day]" key={dailyForecast.day}>
-            <DailyForecast dailyForecast={dailyForecast}></DailyForecast>
-          </Link>
+          <DailyForecastContainer
+            onClick={() => setMoreDetails(!moreDetails)}
+            onMouseDown={e => e.preventDefault()}
+          >
+            {moreDetails ? (
+              <MoreDetails data={dailyForecast}></MoreDetails>
+            ) : (
+              <DailyForecast data={dailyForecast}></DailyForecast>
+            )}
+          </DailyForecastContainer>
         )
       })}
     </StyledSlider>
