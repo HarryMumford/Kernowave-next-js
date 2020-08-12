@@ -1,6 +1,6 @@
 import React from "react"
 import { useRouter } from "next/router"
-import BeachComponent from "../../../components/Beach"
+import BeachComponent from "../../../components/beach"
 import { location } from "../../../constants"
 
 import "isomorphic-unfetch"
