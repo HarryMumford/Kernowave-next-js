@@ -1,9 +1,9 @@
 import Forecast from "./forecast"
-import { mockedResponse } from "../mocks/mocked-api-response"
+import { mockedForecast } from "../mocks/mocked-forecast"
 
 const onshoreDirection = 0
 
-const forecast = new Forecast(mockedResponse, onshoreDirection)
+const forecast = new Forecast(mockedForecast, onshoreDirection)
 
 describe("Forecast", () => {
   describe("windRelativeDirection", () => {

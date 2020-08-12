@@ -29,7 +29,7 @@ export default class BeachComponent extends React.Component {
 
   render() {
     const { data } = this.props
-    const { forecast } = this.props.data
+    const { forecast, tide } = this.props.data
     const { loaded } = this.state
 
     var settings = {
@@ -75,7 +75,7 @@ export default class BeachComponent extends React.Component {
               <Heading>{data.name}</Heading>
             </Header>
             <Section>
-              <Slider forecast={forecast} />
+              <Slider forecast={forecast} tideForecast={tide} />
             </Section>
             <Footer>
               <FooterText>Data provided by</FooterText>

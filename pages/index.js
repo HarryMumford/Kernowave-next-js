@@ -27,7 +27,7 @@ export default function Index() {
           const name = location[spotId].name
 
           return (
-            <Link href="/beach/[spot]" as={`/beach/${spotId}`}>
+            <Link key={spotId} href="/beach/[spot]" as={`/beach/${spotId}`}>
               <BeachContainer>{name}</BeachContainer>
             </Link>
           )

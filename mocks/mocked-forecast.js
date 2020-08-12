@@ -1,4 +1,4 @@
-export const mockedResponse = [
+export const mockedForecast = [
   {
     timestamp: 1595199600,
     localTimestamp: 1595203200,

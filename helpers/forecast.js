@@ -1,4 +1,5 @@
 import SurfQuality from "./surf-quality"
+import { days } from "../utils/days"
 
 export default class Forecast {
   constructor(data, onshoreDirection) {
@@ -29,15 +30,7 @@ export default class Forecast {
     const data = this.data
 
     for (let d = 4; d < data.length - 4; d += 8) {
-      const day = [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ][new Date(data[d].timestamp * 1000).getDay()]
+      const day = days[new Date(data[d].timestamp * 1000).getDay()]
       const waveHeight = Math.round(
         (data[d].swell.maxBreakingHeight + data[d].swell.minBreakingHeight) / 2
       )

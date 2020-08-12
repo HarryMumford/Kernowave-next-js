@@ -34,13 +34,15 @@ export default function Slider(props) {
   return (
     <StyledSlider {...settings}>
       {props.forecast.map(dailyForecast => {
+        const { day } = dailyForecast
         return (
           <DailyForecastContainer
+            key={day}
             onClick={() => setMoreDetails(!moreDetails)}
             onMouseDown={e => e.preventDefault()}
           >
             {moreDetails ? (
-              <MoreDetails data={dailyForecast}></MoreDetails>
+              <MoreDetails day={day} data={props.tideForecast}></MoreDetails>
             ) : (
               <DailyForecast data={dailyForecast}></DailyForecast>
             )}
