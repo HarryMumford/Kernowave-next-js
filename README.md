@@ -3,7 +3,7 @@
 
 # Kernowave
 
-[Description](#description) | [Live Website](#live-website) | [Technologies Used](#technologies-used) | [Challenges and Goals](#challenges-and-goals) | [Getting Started](#getting-started) | [How to Run the App](#how-to-run-the-app) | [Continuous Integration and Delivery](#continuous-integration-and-delivery) | [Next Tasks](#next-tasks)
+[Description](#description) | [Live Website](#live-website) | [Technologies Used](#technologies-used) | [Challenges and Goals](#challenges-and-goals) | [Getting Started](#getting-started) | [How to Run the App](#how-to-run-the-app) | [How to Run the tests](#how-to-run-the-tests) | [Continuous Integration and Delivery](#continuous-integration-and-delivery) | [Next Tasks](#next-tasks)
 
 ## Description
 
@@ -40,7 +40,7 @@ cd kernowave-next-js
 npm i
 ```
 
-## How to Run the App
+## How to Run the app
 
 - To start dev mode `npm run dev`
 - To build `npm run build`
