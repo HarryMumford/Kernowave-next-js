@@ -4,8 +4,8 @@ import BeachComponent from "../../../components/beach"
 import { location } from "../../../constants"
 
 import "isomorphic-unfetch"
-import SurfQuality from "../../../helpers/surf-quality"
 import Forecast from "../../../helpers/forecast"
+import TideForecast from "../../../helpers/tide-forecast"
 
 const Beach = props => {
   const router = useRouter()
@@ -15,9 +15,32 @@ const Beach = props => {
   )
 }
 
+const getTideData = async () => {
+  const apiKey = "7d3a1acb861c47b2932bb2fbb6a65594"
+  const headers = new Headers()
+
+  headers.append("Ocp-Apim-Subscription-Key", apiKey)
+
+  const res = await fetch(
+    "https://admiraltyapi.azure-api.net/uktidalapi/api/V1/Stations/0002/TidalEvents",
+    {
+      headers
+    }
+  )
+
+  const data = await res.json()
+
+  return data
+}
+
 Beach.getInitialProps = async function() {
-  const locations = Object.keys(location)
   let payload = {}
+
+  const tideData = await getTideData()
+
+  let tideForecast = new TideForecast(tideData).create()
+
+  const locations = Object.keys(location)
 
   for (let i = 0; i < locations.length; i++) {
     const spotId = locations[i]
@@ -35,7 +58,8 @@ Beach.getInitialProps = async function() {
     payload[spotId] = {
       name,
       onshoreDirection,
-      forecast: forecast
+      forecast: forecast,
+      tide: tideForecast
     }
   }
 
