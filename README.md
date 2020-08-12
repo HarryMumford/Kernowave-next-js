@@ -45,6 +45,10 @@ npm i
 - To start dev mode `npm run dev`
 - To build `npm run build`
 - To start in prod `npm run start`
+
+## How to Run the tests
+
+- Watch all tests `npm run test`
   
 ## Continuous Integration and Delivery
 
